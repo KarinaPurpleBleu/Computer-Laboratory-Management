@@ -1,13 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+=======
+>>>>>>> 0b12bf4 (Initial commit)
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+<<<<<<< HEAD
 // simple login page for Computer Laboratory Management System
 Route::get('/login', function () {
     return view('login');
@@ -34,4 +38,24 @@ Route::post('/logout', function (Request $request) {
     $request->session()->invalidate();
     $request->session()->regenerateToken();
     return redirect('/');
+=======
+// authentication pages
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/signup', function () {
+    return view('signup');
+});
+
+// Optional: handle form submissions (dummy closures for now)
+Route::post('/login', function () {
+    // authenticate user...
+    return redirect('/signup');
+});
+
+Route::post('/signup', function () {
+    // create user...
+    return redirect('/login');
+>>>>>>> 0b12bf4 (Initial commit)
 });
