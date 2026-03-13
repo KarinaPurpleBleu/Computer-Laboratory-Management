@@ -1,23 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-=======
->>>>>>> 0b12bf4 (Initial commit)
+
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
 // simple login page for Computer Laboratory Management System
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+// login process
 Route::post('/login', function (Request $request) {
+
     $credentials = $request->validate([
         'email' => ['required', 'email'],
         'password' => ['required'],
@@ -33,17 +33,21 @@ Route::post('/login', function (Request $request) {
     ])->onlyInput('email');
 });
 
+// logout
 Route::post('/logout', function (Request $request) {
+
     Auth::logout();
+
     $request->session()->invalidate();
     $request->session()->regenerateToken();
+
     return redirect('/');
-=======
 // authentication pages
 Route::get('/login', function () {
     return view('login');
 });
 
+// signup page
 Route::get('/signup', function () {
     return view('signup');
 });
@@ -57,5 +61,4 @@ Route::post('/login', function () {
 Route::post('/signup', function () {
     // create user...
     return redirect('/login');
->>>>>>> 0b12bf4 (Initial commit)
-});
+});});
