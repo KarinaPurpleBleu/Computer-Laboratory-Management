@@ -35,7 +35,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-maroon uppercase tracking-wider mb-1">Password</label>
-                    <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-maroon focus:border-maroon outline-none">
+                    <input type="password" minlength="8"required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" placeholder="Create Password; Minimum of 8 characters" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-maroon focus:border-maroon outline-none">
                 </div>
                 
                 <button type="submit" class="w-full py-3 bg-maroon text-white font-bold rounded hover:bg-red-900 transition duration-200 uppercase text-xs tracking-widest shadow-lg">
