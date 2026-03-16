@@ -49,3 +49,8 @@ Route::post('/signup', function () {
     // create user...
     return redirect('/login');
 });
+
+Route::get('/user-agreement', function () {
+    return view('user-agreement');
+});
+
