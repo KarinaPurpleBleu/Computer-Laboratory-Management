@@ -45,9 +45,26 @@ Route::get('/signup', function () {
     return view('signup');
 });
 
-Route::post('/signup', function () {
-    // create user...
-    return redirect('/login');
+Route::post('/signup', function (Request $request) {
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'email', 'max:255', 'unique:users,email'],
+        'password' => ['required', 'string', 'min:8'],
+        'agree' => ['accepted'],
+    ], [
+        'name.required' => 'Fill the needed details before creating account.',
+        'email.required' => 'Fill the needed details before creating account.',
+        'password.required' => 'Fill the needed details before creating account.',
+        'agree.accepted' => 'You must agree to the user agreement before registering.',
+    ]);
+
+    User::create([
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+        'password' => $request->input('password'),
+    ]);
+
+    return redirect('/login')->with('success', 'Account created successfully. You can now log in.');
 });
 
 Route::get('/user-agreement', function () {
