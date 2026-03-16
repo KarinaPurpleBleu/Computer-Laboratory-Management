@@ -43,6 +43,8 @@ Route::post('/logout', function (Request $request) {
 
     return redirect('/');
 // authentication pages
+});
+
 Route::get('/login', function () {
     return view('login');
 });
@@ -61,4 +63,10 @@ Route::post('/login', function () {
 Route::post('/signup', function () {
     // create user...
     return redirect('/login');
-});});
+});
+
+
+
+Route::get('/user-agreement', function () {
+    return view('user-agreement');
+});
