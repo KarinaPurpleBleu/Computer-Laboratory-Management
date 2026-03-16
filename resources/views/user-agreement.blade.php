@@ -62,7 +62,7 @@ Before proceeding please read thoroughly the following terms and conditions. By 
 </p>
 
 <p class="text-gray-600 text-sm mb-4">
-CLMS automatically records your personal information as the last user during your session. By this, we will identify who's gonna be the responsible for any damages, missing parts, or issues before you log out.
+CLMS automatically records your personal information as the last user during your session. By this, we will identify who's gonna be the responsible for any damages, missing parts, or issues before you log out. This agreement outlines your responsibilities and the rules you must follow while using the CLMS Portal and its associated computer laboratories.
 </p>
 
 <div class="space-y-4 text-sm text-gray-700">
@@ -117,7 +117,7 @@ Violations result in immediate access ban and full liability.
 <p>
 We collect only your name, timestamps, and user's computer number for accountability purposes, in full compliance with Republic Act No. 10173 (Data Privacy Act of 2012).
 Data is confidential and only the lab admin has authorized for monitoring, used only for maintenance, tracing, and deleted after 30 days.
-You consent to this processing by logging in. 
+You consent to this processing by logging in.
 </p>
 </div>
 
