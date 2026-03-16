@@ -117,7 +117,7 @@ Violations result in immediate access ban and full liability.
 <p>
 We collect only your name, timestamps, and user's computer number for accountability purposes, in full compliance with Republic Act No. 10173 (Data Privacy Act of 2012).
 Data is confidential and only the lab admin has authorized for monitoring, used only for maintenance, tracing, and deleted after 30 days.
-You consent to this processing by logging in.
+You consent to this processing by logging in. 
 </p>
 </div>
 
