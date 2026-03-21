@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,15 +29,15 @@
             <form action="#" method="POST" class="space-y-4">
                 <div>
                     <label class="block text-xs font-bold text-primary uppercase tracking-wider mb-1">Full Name</label>
-                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
+                    <input type="text" placeholder="Enter your full name" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-primary uppercase tracking-wider mb-1">Email</label>
-                    <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
+                    <input type="email" placeholder="Enter your email" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-primary uppercase tracking-wider mb-1">Password</label>
-                    <input type="password" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
+                    <input type="password" placeholder="Enter your password" required pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
                 </div>
                 <button type="submit" class="w-full py-3 bg-primary text-white font-bold rounded hover:bg-[#0099cc] transition duration-200 uppercase text-xs tracking-widest shadow-lg">
                     Register Account
