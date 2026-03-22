@@ -74,3 +74,4 @@ Route::get('/user-agreement', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+

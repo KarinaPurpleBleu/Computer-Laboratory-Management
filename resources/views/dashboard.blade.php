@@ -69,10 +69,12 @@
             </div>
         </div>
 
+       
         <div x-show="view === 'pcs'" x-cloak>
+      
             <h1 class="text-3xl font-bold text-slate-900 mb-2">Available PCs</h1>
             <p class="text-slate-500 mb-8">Select a station to reserve or start a session.</p>
-            
+
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 @for ($i = 1; $i <= 12; $i++)
                 <div class="bg-white border-2 border-transparent hover:border-primary p-4 rounded-xl text-center transition cursor-pointer shadow-sm group">
@@ -86,10 +88,12 @@
             </div>
         </div>
 
+       
         <div x-show="view === 'history'" x-cloak>
+      
             <h1 class="text-3xl font-bold text-slate-900 mb-2">Session History</h1>
             <p class="text-slate-500 mb-8">Detailed log of your lab activity.</p>
-            
+
             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
                 <table class="w-full text-left text-sm">
                     <thead class="bg-slate-50 border-b">
@@ -121,14 +125,18 @@
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path></svg>
             <span class="text-[10px] font-bold mt-1">Dashboard</span>
         </button>
+       
         <button @click="view = 'pcs'" :class="view === 'pcs' ? 'text-primary' : 'text-slate-400'" class="flex flex-col items-center p-2 transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
             <span class="text-[10px] font-bold mt-1">PCs</span>
         </button>
+    
+        
         <button @click="view = 'history'" :class="view === 'history' ? 'text-primary' : 'text-slate-400'" class="flex flex-col items-center p-2 transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <span class="text-[10px] font-bold mt-1">History</span>
         </button>
+    
         <form action="{{ url('/logout') }}" method="POST">
             @csrf
             <button type="submit" class="flex flex-col items-center p-2 text-slate-400 hover:text-red-500 transition">

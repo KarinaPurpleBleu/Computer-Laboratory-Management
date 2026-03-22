@@ -39,13 +39,18 @@
                     <label class="block text-xs font-bold text-primary uppercase tracking-wider mb-1">Password</label>
                     <input type="password" placeholder="Enter your password" required pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
                 </div>
+                <div>
+                    <label class="block text-xs font-bold text-primary uppercase tracking-wider mb-1"> Confirm Password </label>
+                     <input type="password" id="confirmPassword" placeholder="Confirm your password" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
+                </div>
+
                 <button type="submit" class="w-full py-3 bg-primary text-white font-bold rounded hover:bg-[#0099cc] transition duration-200 uppercase text-xs tracking-widest shadow-lg">
                     Register Account
                 </button>
             </form>
 
             <div class="mt-8 pt-4 border-t border-gray-100 text-center">
-                <p class="text-sm text-gray-600 italic">Already a member? 
+                <p class="text-sm text-gray-600 italic">Already a member? Click here to
                     <a href="{{ url('/login') }}" class="text-primary font-bold hover:underline">Log In</a>
                 </p>
             </div>
@@ -59,6 +64,20 @@
             <p class="mt-4 text-lg opacity-90 italic">Creating a more efficient workspace for everyone.</p>
         </div>
     </div>
+
+    <script>
+        // Password confirmation validation
+        const passwordInput = document.querySelector('input[type="password"]');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        confirmPasswordInput.addEventListener('input', () => {
+            if (confirmPasswordInput.value !== passwordInput.value) {
+                confirmPasswordInput.setCustomValidity("Passwords do not match.");
+            } else {
+                confirmPasswordInput.setCustomValidity("");
+            }
+        });
+    </script>
 
 </body>
 </html>
