@@ -37,7 +37,7 @@
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-primary uppercase tracking-wider mb-1">Password</label>
-                    <input type="password" placeholder="Enter your password" required pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
+                    <input type="password" placeholder="Enter your password"  class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-[#00c3ff] outline-none transition-all">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-primary uppercase tracking-wider mb-1"> Confirm Password </label>
