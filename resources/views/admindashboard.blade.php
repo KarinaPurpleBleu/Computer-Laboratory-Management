@@ -8,32 +8,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
-        :root {
-            --primary-blue: #00c3ff;
-        }
+    :root {
+        --primary-blue: #00c3ff;
+    }
+    .text-primary { color: var(--primary-blue); }
+    .bg-primary { background-color: var(--primary-blue); }
 
-        .text-primary {
-            color: var(--primary-blue);
-        }
+    [x-cloak] { display: none !important; }
 
-        .bg-primary {
-            background-color: var(--primary-blue);
-        }
-
-        [x-cloak] {
-            display: none !important;
-        }
-    </style>
+    /* Active Bottom Navigation Style */
+    .nav-active {
+        background-color: white;
+        color: var(--primary-blue);
+        border-radius: 9999px;
+        box-shadow: 0 4px 15px rgba(0, 195, 255, 0.25);
+    }
+</style>
 </head>
 
 <body class="bg-slate-50 font-sans" x-data="{ view: 'home', isAdmin: @json(in_array(Auth::user()->role_id, [0, 1])), isDeveloper: @json(Auth::user()->role_id === 0) }">
-    <header class="bg-white border-b p-4 flex justify-between items-center sticky top-0 z-20">
+    <header class="bg-[#b5eeff] border-b border-[#9be0f0] p-4 flex justify-between items-center sticky top-0 z-20 shadow-sm">
         <div class="flex items-center gap-2">
             <img src="{{ asset('images/logo.png') }}" class="w-8 h-8 object-contain">
             <span class="font-bold text-xl text-slate-800">CLMS</span>
         </div>
         <div class="flex items-center gap-4">
-            <button class="text-slate-400"><svg class="w-6 h-6" fill="none" stroke="currentColor"
+            <button class="text-slate-600 hover:text-slate-800 transition"><svg class="w-6 h-6" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
@@ -84,7 +84,7 @@
                 </div>
             </template>
 
-            <div class="bg-[#0081a7] rounded-2xl p-8 text-white relative overflow-hidden shadow-lg mb-8">
+            <div class="bg-[#b5eeff] rounded-2xl p-8 text-[#107fa1] relative overflow-hidden shadow-lg mb-8">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="h-2 w-2 bg-green-400 rounded-full animate-pulse"></span>
                     <span class="text-xs font-bold uppercase tracking-widest opacity-80">Active Session</span>
@@ -104,7 +104,7 @@
                 <form action="{{ url('/logout') }}" method="POST">
                     @csrf
                     <button type="submit"
-                        class="absolute bottom-8 right-8 bg-white text-[#0081a7] px-6 py-2 rounded-lg font-bold text-sm hover:bg-slate-100 transition shadow-md">End
+                        class="absolute bottom-8 right-8  bg-white text-[#0081a7] px-6 py-2 rounded-lg font-bold text-sm hover:bg-slate-100 transition shadow-md">End
                         Session</button>
                 </form>
             </div>
@@ -548,57 +548,57 @@
 
     </main>
 
-    <nav
-        class="fixed bottom-0 left-0 right-0 bg-white border-t p-2 flex justify-around items-center z-30 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
-        <button @click="view = 'home'" :class="view === 'home' ? 'text-primary' : 'text-slate-400'"
-            class="flex flex-col items-center p-2 transition">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path>
-            </svg>
-            <span class="text-[10px] font-bold mt-1">Dashboard</span>
-        </button>
+    <nav class="fixed bottom-0 left-0 right-0 bg-[#b5eeff] border-t border-[#9be0f0] p-3 flex justify-around items-center z-30 shadow-[0_-4px_15px_rgba(181,238,255,0.5)]">
 
-        <button @click="view = 'pcs'" :class="view === 'pcs' ? 'text-primary' : 'text-slate-400'"
-            class="flex flex-col items-center p-2 transition">
+    <button @click="view = 'home'"
+            :class="view === 'home' ? 'nav-active' : 'text-slate-700 hover:text-slate-900'"
+            class="flex flex-col items-center py-2 px-5 transition-all duration-200">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path>
+        </svg>
+        <span class="text-[10px] font-bold mt-1">Dashboard</span>
+    </button>
+
+    <button @click="view = 'pcs'"
+            :class="view === 'pcs' ? 'nav-active' : 'text-slate-700 hover:text-slate-900'"
+            class="flex flex-col items-center py-2 px-5 transition-all duration-200">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+        </svg>
+        <span class="text-[10px] font-bold mt-1">PCs</span>
+    </button>
+
+    <template x-if="isDeveloper">
+        <button @click="view = 'users'"
+                :class="view === 'users' ? 'nav-active' : 'text-slate-700 hover:text-slate-900'"
+                class="flex flex-col items-center py-2 px-5 transition-all duration-200">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path
-                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                </path>
+                <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
             </svg>
-            <span class="text-[10px] font-bold mt-1">PCs</span>
+            <span class="text-[10px] font-bold mt-1">Users</span>
         </button>
+    </template>
 
-        <template x-if="isDeveloper">
-            <button @click="view = 'users'" :class="view === 'users' ? 'text-primary' : 'text-slate-400'"
-                class="flex flex-col items-center p-2 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path
-                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                    </path>
-                </svg>
-                <span class="text-[10px] font-bold mt-1">Users</span>
-            </button>
-        </template>
+    <button @click="view = 'history'"
+            :class="view === 'history' ? 'nav-active' : 'text-slate-700 hover:text-slate-900'"
+            class="flex flex-col items-center py-2 px-5 transition-all duration-200">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span class="text-[10px] font-bold mt-1">History</span>
+    </button>
 
-        <button @click="view = 'history'" :class="view === 'history' ? 'text-primary' : 'text-slate-400'"
-            class="flex flex-col items-center p-2 transition">
+    <template x-if="isAdmin">
+        <button @click="view = 'requests'"
+                :class="view === 'requests' ? 'nav-active' : 'text-slate-700 hover:text-slate-900'"
+                class="flex flex-col items-center py-2 px-5 transition-all duration-200">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <span class="text-[10px] font-bold mt-1">History</span>
+            <span class="text-[10px] font-bold mt-1">Requests</span>
         </button>
-
-        <template x-if="isAdmin">
-            <button @click="view = 'requests'" :class="view === 'requests' ? 'text-primary' : 'text-slate-400'"
-                class="flex flex-col items-center p-2 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <span class="text-[10px] font-bold mt-1">Requests</span>
-            </button>
-        </template>
-    </nav>
+    </template>
+</nav>
 
     <script>
         document.querySelectorAll('.role-check').forEach((checkbox) => {

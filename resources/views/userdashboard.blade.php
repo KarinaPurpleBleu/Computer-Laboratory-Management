@@ -28,14 +28,14 @@
 
 <body class="bg-slate-50 font-sans" x-data="{ view: 'home', isDeveloper: @json(Auth::user()->role_id === 0) }">
 
-    <header class="bg-white border-b p-4 flex justify-between items-center sticky top-0 z-20">
+    <header class="bg-[#b5eeff] border-b p-4 flex justify-between items-center sticky top-0 z-20">
         <div class="flex items-center gap-2">
             <img src="{{ asset('images/logo.png') }}" class="w-8 h-8 object-contain">
             <span class="font-bold text-xl text-slate-800">CLMS</span>
         </div>
         <div class="flex items-center gap-4">
-            <button class="text-slate-400"><svg class="w-6 h-6" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24">
+            <button class="text-slate-600 hover:text-slate-800 transition"><svg class="w-6 h-6" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                     </path>
@@ -53,7 +53,7 @@
             <h1 class="text-3xl font-bold text-slate-900">Welcome back, {{ Auth::user()->name ?? 'Lance' }}.</h1>
             <p class="text-slate-500 mb-8">Your workstation is ready for your next project.</p>
 
-            <div class="bg-[#0081a7] rounded-2xl p-8 text-white relative overflow-hidden shadow-lg mb-8">
+            <div class="bg-[#b5eeff] rounded-2xl p-8 text-[#107fa1] relative overflow-hidden shadow-lg mb-8">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="h-2 w-2 bg-green-400 rounded-full animate-pulse"></span>
                     <span class="text-xs font-bold uppercase tracking-widest opacity-80">Active Session</span>
@@ -97,7 +97,8 @@
                             @forelse($adminLogs as $log)
                                 <p class="text-slate-500">>> [{{ $log->admin->name ?? 'Unknown Admin' }}]
                                     {{ $log->description ?? $log->action }}
-                                    ({{ \Carbon\Carbon::parse($log->created_at)->format('M d, H:i') }})</p>
+                                    ({{ \Carbon\Carbon::parse($log->created_at)->format('M d, H:i') }})
+                                </p>
                             @empty
                                 <p class="text-slate-500">>> No recent admin activities</p>
                             @endforelse
@@ -135,8 +136,12 @@
             <h1 class="text-3xl font-bold text-slate-900 mb-2">Available PCs</h1>
             <p class="text-slate-500 mb-8">Select a station to reserve or start a session.</p>
 
+            @php
+                $allPCs = \App\Models\PC::orderBy('pc_name')->get();
+            @endphp
+
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                @for ($i = 1; $i <= 12; $i++)
+                @forelse($allPCs as $pc)
                     <div
                         class="bg-white border-2 border-transparent hover:border-primary p-4 rounded-xl text-center transition cursor-pointer shadow-sm group">
                         <div
@@ -147,10 +152,26 @@
                                 </path>
                             </svg>
                         </div>
-                        <p class="font-bold text-slate-700">PC-{{ str_pad($i, 3, '0', STR_PAD_LEFT) }}</p>
-                        <p class="text-[10px] text-green-500 font-bold uppercase mt-1">Ready</p>
+                        <p class="font-bold text-slate-700">{{ $pc->pc_name }}</p>
+                        <p
+                            class="text-[10px] font-bold uppercase mt-1
+                            @if ($pc->status === 'ready') text-green-500
+                            @elseif($pc->status === 'occupied') text-orange-500
+                            @else text-red-500 @endif">
+                            @if ($pc->status === 'ready')
+                                Ready
+                            @elseif($pc->status === 'occupied')
+                                Occupied
+                            @else
+                                Maintenance
+                            @endif
+                        </p>
                     </div>
-                @endfor
+                @empty
+                    <div class="col-span-full text-center py-8 text-slate-500">
+                        <p>No PCs available yet.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
 
@@ -189,31 +210,43 @@
     </main>
 
     <nav
-        class="fixed bottom-0 left-0 right-0 bg-white border-t p-2 flex justify-around items-center z-30 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
-        <button @click="view = 'home'" :class="view === 'home' ? 'text-primary' : 'text-slate-400'"
-            class="flex flex-col items-center p-2 transition">
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path>
-            </svg>
+        class="fixed bottom-0 left-0 right-0 bg-[#b5eeff] border-t p-2 flex justify-around items-center z-30 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+
+        <button @click="view = 'home'"
+            :class="view === 'home' ? 'text-primary bg-white shadow-md' : 'hover:text-slate-900'"
+            class="flex flex-col items-center p-3 transition-all duration-200 rounded-2xl">
+
+            <div :class="view === 'home' ? 'bg-white p-2 rounded-full shadow-sm' : 'p-2'">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path>
+                </svg>
+            </div>
             <span class="text-[10px] font-bold mt-1">Dashboard</span>
         </button>
 
-        <button @click="view = 'pcs'" :class="view === 'pcs' ? 'text-primary' : 'text-slate-400'"
-            class="flex flex-col items-center p-2 transition">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path
-                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                </path>
-            </svg>
+        <button @click="view = 'pcs'"
+            :class="view === 'pcs' ? 'text-primary bg-white shadow-md' : 'hover:text-slate-900'"
+            class="flex flex-col items-center p-3 transition-all duration-200 rounded-2xl">
+
+            <div :class="view === 'pcs' ? 'bg-white p-2 rounded-full shadow-sm' : 'p-2'">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path
+                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                    </path>
+                </svg>
+            </div>
             <span class="text-[10px] font-bold mt-1">PCs</span>
         </button>
 
+        <button @click="view = 'history'"
+            :class="view === 'history' ? 'text-primary bg-white shadow-md' : 'hover:text-slate-900'"
+            class="flex flex-col items-center p-3 transition-all duration-200 rounded-2xl">
 
-        <button @click="view = 'history'" :class="view === 'history' ? 'text-primary' : 'text-slate-400'"
-            class="flex flex-col items-center p-2 transition">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
+            <div :class="view === 'history' ? 'bg-white p-2 rounded-full shadow-sm' : 'p-2'">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
             <span class="text-[10px] font-bold mt-1">History</span>
         </button>
     </nav>

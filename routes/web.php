@@ -12,7 +12,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        $user = Auth::user();
+        if (in_array($user->role_id, [0, 1])) {
+            return redirect('/admindashboard');
+        } elseif ($user->role_id == 2) {
+            return redirect('/userdashboard');
+        } else {
+            return redirect('/login');
+        }
+    }
+    return redirect('/login');
 });
 
 Route::get('/login', function () {

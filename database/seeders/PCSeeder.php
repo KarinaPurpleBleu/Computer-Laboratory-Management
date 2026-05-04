@@ -17,5 +17,10 @@ class PCSeeder extends Seeder
             'pc_name' => 'PC-001',
             'status' => 'ready',
         ]);
+
+        PC::create([
+            'pc_name' => 'PC-002',
+            'status' => 'ready',
+        ]);
     }
 }
